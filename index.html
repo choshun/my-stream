@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+	<title>SoundCloud</title>
+
+	<link rel="stylesheet" href="css/twitter-bootstrap.css" type="text/css" />
+	<link rel="stylesheet/less" href="css/main.css" type="text/css" />
+
+	<script src="js/less-1.3.3-min.js"></script>
+</head>
+
+<body ng-app="Soundcloud">
+	<div ng-controller="SoundcloudCtrl">
+		<div id="header">
+			<div id="player"></div>
+			
+			<form class="well form-search">
+				<input ng-model="searchTerm" class="input-medium search-query" type="text">
+				<button class="btn" type="submit" ng-click="doSearch()">Search</button>
+			</form>
+
+		</div>
+	
+		<!-- window.width: {{window_width}}
+		{{trackCount}} -->
+		<div class="row-fluid">
+		  	<div class="span12">
+		  		<ul id="tracks">
+					<li class="span4 hidden-track track left-three-{{$index % 3 == 0}} left-two-{{$index % 2 == 0}}" ng-class="getClass($index, track)" ng-repeat="track in soundCloudResult | orderBy:'created_at':true">
+						<a class="track-link" ng-click="playTrack($index)" data-track-url="{{track.permalink_url}}">
+							{{track.user.username}}
+							{{$index}} {{item.number}}
+						</a>
+					</li>
+				</ul>
+		  	</div>
+		</div>
+	</div>
+
+	<script src="js/lodash.js"></script>
+	<script src="js/angular.js"></script>
+	<script src="js/angular-resource.js"></script>
+	<script src="js/jquery-1.7.2-min.js"></script>
+	<script src="http://connect.soundcloud.com/sdk.js"></script>
+	<script src="js/media.js"></script>
+</body>
+
+</html>
